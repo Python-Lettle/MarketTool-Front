@@ -5,19 +5,31 @@
     </div>
     <div class="item-info">
       <h2>{{ itemName }}</h2>
-      <p>市场价格: <input
-                type="number"
+      <div class="info-bar">
+        <div class="info-item">
+          <span class="info-label">市场价格:</span>
+          <input type="number"
                 v-model="localItemPrice"
                 @input="updatePrice"
-                min="0"
-                ></p>
-      <p>数量: <input
-                type="number"
+                min="0">
+        </div>
+        <div class="info-item">
+          <span class="info-label">成本:</span>
+          <div class="info-value">{{ itemCost }}</div>
+        </div>
+        <div class="info-item">
+          <span class="info-label">利润:</span>
+          <div class="info-value">{{ localItemPrice - itemCost }}</div>
+        </div>
+        <div class="info-item">
+          <span class="info-label">数量:</span>
+          <input type="number"
                 v-model="localItemAmount"
                 @input="updateAmount"
-                min="0"
-                > </p>
+                min="0">
+        </div>
 
+      </div>
     </div>
   </div>
 </template>
@@ -41,7 +53,12 @@ export default {
     itemAmount: {
       type: Number,
       required: true
-    }
+    },
+    itemCost: {
+      type: Number,
+      required: false,
+      default: 0
+    },
   },
   data() {
       return {
@@ -73,19 +90,16 @@ export default {
 
 <style scoped>
 .item-card {
-  width: 100%; /* 默认宽度为 100% */
-  min-width: 24rem; /* 最小宽度 */
-  max-width: 35rem; /* 最大宽度 */
-  height: 10rem;
-
-
-  background-color: #FFF;
-
   display: flex;
-  border: 1px solid #ccc;
+  width: 100%; /* 默认宽度为 100% */
+  min-width: 35rem; /* 最小宽度 */
+  max-width: 50rem; /* 最大宽度 */
+  height: 8rem;
   padding: 16px;
+  background-color: #fff;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
 }
 
 .item-info input {
@@ -93,8 +107,8 @@ export default {
 }
 
 .item-image img {
-  width: 205px;
-  height: 106px;
+  width: 100px;
+  height: 53px;
   object-fit: cover;
   border-radius: 8px 0 0 8px;
 }
@@ -113,4 +127,27 @@ export default {
   margin: 0 0 8px;
   color: #555;
 }
+
+.info-bar {
+  display: flex; /* 使用 Flexbox 布局 */
+  align-items: center; /* 垂直居中 */
+  justify-content: space-between; /* 信息项均匀分布 */
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin: 0 10px; /* 信息项之间的间距 */
+}
+
+.info-label {
+  margin-right: 8px; /* 标签和值之间的间距 */
+  font-weight: bold;
+  color: #333;
+}
+
 </style>
