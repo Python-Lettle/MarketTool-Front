@@ -2,12 +2,12 @@
   <div class="item-card">
     <div class="item-image">
       <img :src="imageSrc" alt="item Image" />
+      <h2 class="item-name">{{ itemName }}</h2>
     </div>
     <div class="item-info">
-      <h2>{{ itemName }}</h2>
       <div class="info-bar">
         <div class="info-item">
-          <span class="info-label">市场价格:</span>
+          <span class="info-label">价格:</span>
           <input type="number"
                 v-model="localItemPrice"
                 @input="updatePrice"
@@ -90,11 +90,8 @@ export default {
 
 <style scoped>
 .item-card {
-  display: flex;
+  display: inline;
   width: 100%; /* 默认宽度为 100% */
-  min-width: 35rem; /* 最小宽度 */
-  max-width: 50rem; /* 最大宽度 */
-  height: 8rem;
   padding: 16px;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -102,15 +99,10 @@ export default {
   box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
 }
 
-.item-info input {
-  width: 80px;
-}
-
 .item-image img {
+  display: inline-block;
   width: 100px;
   height: 53px;
-  object-fit: cover;
-  border-radius: 8px 0 0 8px;
 }
 
 .item-info {
@@ -118,21 +110,22 @@ export default {
   padding-left: 16px;
 }
 
-.item-info h2 {
-  margin: 0 0 8px;
-  font-size: 1.5em;
-}
-
 .item-info p {
   margin: 0 0 8px;
   color: #555;
 }
 
+.item-name {
+  display: inline-block;
+  margin: 0 10px 8px;
+  font-size: 1.5em;
+}
+
 .info-bar {
-  display: flex; /* 使用 Flexbox 布局 */
-  align-items: center; /* 垂直居中 */
-  justify-content: space-between; /* 信息项均匀分布 */
-  padding: 16px;
+  display: flex;
+  flex-wrap: wrap; /* 允许换行 */
+  gap: 10px; /* 信息项之间的间距 */
+  padding: 10px;
   background-color: #f5f5f5;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
@@ -140,14 +133,26 @@ export default {
 
 .info-item {
   display: flex;
+  flex: 1 1 calc(50% - 8px); /* 每行显示两个，减去间距 */
   align-items: center;
-  margin: 0 10px; /* 信息项之间的间距 */
+  max-width: 45%;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
+}
+
+.info-item input {
+  max-width: 50%;
 }
 
 .info-label {
-  margin-right: 8px; /* 标签和值之间的间距 */
+  width: 50%;
+  height: 25px;
+  margin-right: 8px;
   font-weight: bold;
   color: #333;
 }
+
 
 </style>
